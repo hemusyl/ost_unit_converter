@@ -30,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 border: OutlineInputBorder(),
               ),
             ),
+            SizedBox(height: 15),
             FractionallySizedBox(
               // width: double.infinity,
                 widthFactor: 0.6,
