@@ -102,11 +102,8 @@ class _HomeScreenState extends State<HomeScreen> {
               // width: double.infinity,
                 widthFactor: 0.6,
                 child: ElevatedButton(
-                  onPressed: () {
-                    if (_controller.text.isNotEmpty) {
-                      convert();
-                    }
-                  },
+                  onPressed: convert,
+
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.yellow,
                   ),
