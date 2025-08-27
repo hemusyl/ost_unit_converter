@@ -27,8 +27,13 @@ class _HomeScreenState extends State<HomeScreen> {
   double inputValue = 0;
   double result = 0.0;
 
+  // double convertLength(double value, String fromUnit, String toUnit) {
+  //  double valueInMeters = value / lengthUnits[fromUnit]!;//convert to base
+  //  return valueInMeters * lengthUnits[toUnit]!;       // convert to target
+  // }
+
   void convert() {
-    double valueInMeters = inputValue   / convertionTypes[fromUnit]!;
+    double valueInMeters = inputValue/convertionTypes[fromUnit]!;
     setState(() {
       result = valueInMeters * convertionTypes [toUnit]!;
     });
@@ -48,10 +53,14 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             TextFormField(
               controller: _controller,
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 hintText: 'Unit',
                 border: OutlineInputBorder(),
               ),
+              onChanged: (val) {
+                inputValue = double.tryParse(val) ?? 0;
+              },
             ),
             SizedBox(height: 15),
             Row(
@@ -92,13 +101,21 @@ class _HomeScreenState extends State<HomeScreen> {
             FractionallySizedBox(
               // width: double.infinity,
                 widthFactor: 0.6,
-                child: ElevatedButton(onPressed: () {},
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_controller.text.isNotEmpty) {
+                      convert();
+                    }
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.yellow,
                   ),
                   child: Text('Convert'),
-                )
-            )
+                ),
+            ),
+            SizedBox(height: 20),
+            Text("Result: $result $toUnit",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           ],
         ),
       ),
